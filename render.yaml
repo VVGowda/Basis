@@ -1,0 +1,12 @@
+# Render.com blueprint. Deploy with: connect the repo, Render reads this file.
+# Nothing here needs a secret, because no upstream this app uses requires a key.
+services:
+  - type: web
+    name: basis
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8767
