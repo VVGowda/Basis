@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basis - know exactly which banks can lend to you</title>
+<meta name="description" content="Check yourself against federal loan program rules and get the real FDIC-insured banks serving your ZIP code, ranked on their complaint record. Every figure traced to a government source.">
+<link rel="stylesheet" href="assets/style.css?v=0951b353">
+<link rel="stylesheet" href="assets/basis.css?v=1dcfa2a0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%230a0a0a'/><circle cx='16' cy='16' r='6' fill='%23f1f0ee'/></svg>">
+</head>
+<body>
+
+<div class="shell" id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="card hero">
+    <div class="hero-top">
+      <h1 class="wordmark reveal">Basis<span class="studio">ba&middot;sis, noun<br>the ground a figure rests on</span></h1>
+      <ul class="hero-services reveal">
+        <li>Which loans you qualify for</li>
+        <li>What each one costs a month</li>
+        <li>Which banks near you write them</li>
+        <li>The number behind every answer</li>
+      </ul>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-tagline reveal">
+        Before you talk to a lender, know where you stand. Basis checks your income, debts and
+        credit score against the same federal rulebooks banks underwrite from, then names the
+        real institutions in your ZIP code that can write the loan.
+        <br><br>
+        About three seconds. No account, no email, no credit check.
+      </p>
+      <div class="lead-card reveal">
+        <div class="role-row"><span>Sourced from</span><span class="muted">FDIC &middot; CFPB &middot; US Treasury</span></div>
+        <div class="name">Every figure has a basis</div>
+        <a class="btn" href="#finder"><span>Check now</span><span class="dot"></span></a>
+      </div>
+      <div class="hero-copy-right reveal">
+        <p class="muted">Free to use. Nothing stored.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT YOU GET ============ -->
+  <section class="card">
+    <div class="sec-head">
+      <h2 class="display reveal">You get.</h2>
+    </div>
+    <p class="sec-sub reveal">
+      Most loan sites hand you a rate and a lead form. Basis hands you the whole picture, and
+      shows the arithmetic behind every line of it.
+    </p>
+    <div class="grid-3">
+      <div class="tile-card reveal">
+        <div class="n">01</div>
+        <h3>Every program you qualify for</h3>
+        <p>FHA, VA, USDA, conventional, jumbo, auto, personal and SBA, each checked against its published federal or GSE standard and ranked by what it costs you a month.</p>
+      </div>
+      <div class="tile-card reveal">
+        <div class="n">02</div>
+        <h3>The exact number behind every answer</h3>
+        <p>Not "declined". Instead: you are 60 points short of 620, or $13,799 more down brings your loan-to-value inside the cap. Every check names your value and the limit it met.</p>
+      </div>
+      <div class="tile-card reveal">
+        <div class="n">03</div>
+        <h3>Real banks, ranked</h3>
+        <p>The actual FDIC-insured institutions with branches in your ZIP code, ordered by proximity and by how many people complained about them while applying for a loan.</p>
+      </div>
+      <div class="tile-card tile-card--dark reveal">
+        <div class="n">04</div>
+        <h3>What you could borrow</h3>
+        <p>Your true ceiling on income and debts alone, the monthly payment room behind it, and the date the money would realistically land after weekends and bank holidays.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE TOOL ============ -->
+  <section class="card" id="finder">
+    <div class="sec-head">
+      <h2 class="display reveal">Check.</h2>
+    </div>
+    <p class="sec-sub reveal">
+      Seven fields. No sign-up, no email, no phone number, and no credit check of any kind.
+      Your figures are used for this one calculation and then discarded.
+    </p>
+
+    <div class="tool-grid mt-lg">
+
+      <form class="form-panel reveal" id="finder-form" autocomplete="off">
+        <fieldset class="fs">
+          <legend>What the loan is for</legend>
+          <div class="f">
+            <label for="purpose">Purpose</label>
+            <select id="purpose">
+              <option value="home_purchase">Buying a home</option>
+              <option value="home_refinance">Refinancing a mortgage</option>
+              <option value="auto">Buying a vehicle</option>
+              <option value="personal">Personal loan</option>
+              <option value="small_business">Small business loan</option>
+            </select>
+          </div>
+          <div class="f-row">
+            <div class="f">
+              <label for="loan_amount">Amount needed</label>
+              <input type="number" id="loan_amount" value="340000" min="1" step="1000" required>
+            </div>
+            <div class="f">
+              <label for="down_payment">Down payment</label>
+              <input type="number" id="down_payment" value="60000" min="0" step="1000">
+            </div>
+          </div>
+          <div class="f" id="asset-field">
+            <label for="asset_value">Price of the home</label>
+            <input type="number" id="asset_value" value="400000" min="0" step="1000">
+            <div class="note">Leave blank to use loan plus down payment.</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fs">
+          <legend>Your finances</legend>
+          <div class="f-row">
+            <div class="f">
+              <label for="annual_income">Gross annual income</label>
+              <input type="number" id="annual_income" value="95000" min="1" step="1000" required>
+            </div>
+            <div class="f">
+              <label for="income_currency">Currency</label>
+              <select id="income_currency">
+                <option>USD</option><option>EUR</option><option>GBP</option><option>INR</option>
+                <option>CAD</option><option>AUD</option><option>JPY</option><option>SGD</option>
+                <option>CHF</option><option>MXN</option><option>BRL</option><option>ZAR</option>
+              </select>
+            </div>
+          </div>
+          <div class="f">
+            <label for="monthly_debt">Existing monthly debt payments</label>
+            <input type="number" id="monthly_debt" value="450" min="0" step="25">
+            <div class="note">
+              Car payments, student loans, credit card minimums. Not rent. The currency you pick
+              applies to every amount on this form and is converted at live ECB rates.
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f">
+              <label for="credit_score">Credit score</label>
+              <input type="number" id="credit_score" value="712" min="300" max="850" required>
+            </div>
+            <div class="f">
+              <label for="zip_code">US ZIP code</label>
+              <input type="text" id="zip_code" value="21201" inputmode="numeric" maxlength="5">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fs">
+          <legend>Anything that applies</legend>
+          <div class="chk">
+            <input type="checkbox" id="military_service">
+            <label for="military_service">Military service, veteran, or surviving spouse</label>
+          </div>
+          <div class="chk">
+            <input type="checkbox" id="rural_property">
+            <label for="rural_property">The property is rural or small-town</label>
+          </div>
+          <div class="chk">
+            <input type="checkbox" id="business_operating">
+            <label for="business_operating">I run an operating for-profit US business</label>
+          </div>
+        </fieldset>
+
+        <button class="btn--submit" type="submit" id="submit">Show my options</button>
+        <p class="form-foot">
+          Nothing is stored. Nothing is sold. <a href="privacy.html">How your data is handled</a>
+        </p>
+      </form>
+
+      <div class="results" id="results">
+        <div class="empty">
+          <h3>Your results will appear here</h3>
+          <p>
+            Every program you qualify for, the monthly cost of each, your borrowing ceiling, and
+            the real banks near you that can write the loan.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CREDENTIALS ============ -->
+  <section class="card card--dark">
+    <div class="sec-head">
+      <h2 class="display reveal">Sourced.</h2>
+    </div>
+    <p class="sec-sub reveal">
+      The reason the numbers hold up is that none of them were invented here. Federal registers,
+      federal complaint records and the Treasury's own rates, read fresh on every request.
+    </p>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="client-tile">FDIC</div>
+        <div class="client-tile">CFPB</div>
+        <div class="client-tile">US TREASURY</div>
+        <div class="client-tile">HUD</div>
+        <div class="client-tile">FANNIE MAE</div>
+        <div class="client-tile">FREDDIE MAC</div>
+        <div class="client-tile">VA</div>
+        <div class="client-tile">SBA</div>
+        <div class="client-tile">USDA</div>
+        <div class="client-tile">ECB</div>
+        <div class="client-tile">FDIC</div>
+        <div class="client-tile">CFPB</div>
+        <div class="client-tile">US TREASURY</div>
+        <div class="client-tile">HUD</div>
+        <div class="client-tile">FANNIE MAE</div>
+        <div class="client-tile">FREDDIE MAC</div>
+        <div class="client-tile">VA</div>
+        <div class="client-tile">SBA</div>
+        <div class="client-tile">USDA</div>
+        <div class="client-tile">ECB</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="tile-card reveal">
+        <div class="n">Institutions</div>
+        <h3><span data-stat="banks" data-count="4238">4,238</span></h3>
+        <p>Active FDIC-insured banks, with assets, branch addresses and holding companies, read live from the federal register.</p>
+      </div>
+      <div class="tile-card reveal">
+        <div class="n">Programs</div>
+        <h3><span data-stat="programs" data-count="9">9</span></h3>
+        <p>Loan programs encoded from HUD Handbook 4000.1, the VA Lenders Handbook, the Fannie Mae Selling Guide and SBA SOP 50 10.</p>
+      </div>
+      <div class="tile-card reveal">
+        <div class="n">Complaint records</div>
+        <h3>458k+</h3>
+        <p>Mortgage complaints on file at the CFPB, split by whether people struggled to get the loan or to repay it.</p>
+      </div>
+      <div class="tile-card reveal">
+        <div class="n">Rates</div>
+        <h3>Live</h3>
+        <p>Pricing anchored to the Treasury's own reported average interest rate, read fresh on every request rather than guessed.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Check the working yourself</h3>
+      <p>
+        Every result names the authorities it drew on and whether each answered live or from a
+        brief cache. The <a href="method.html">method</a> page walks through all eight steps
+        between your numbers and the answer, and the <a href="sources.html">sources</a> page
+        names every institution standing behind them.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/main.js?v=62514468"></script>
+<script src="assets/tool.js?v=b64146d2"></script>
+</body>
+</html>

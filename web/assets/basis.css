@@ -1,0 +1,376 @@
+/* ============================================================
+   Basis components
+
+   assets/style.css carries the layout shell, type scale and card
+   system adapted from the fabrica studio template. This file is
+   everything that template has no concept of: a form, verdict
+   cards, itemised checks, lender rows and standing notices.
+   ============================================================ */
+
+/* ---------- the tool ---------- */
+.tool-grid { display: grid; grid-template-columns: minmax(320px, 400px) 1fr; gap: var(--pad); align-items: start; }
+@media (max-width: 980px) { .tool-grid { grid-template-columns: 1fr; } }
+
+.form-panel {
+  background: var(--paper-soft); border-radius: var(--radius-md);
+  padding: clamp(20px, 2.4vw, 30px); position: sticky; top: var(--gap);
+}
+@media (max-width: 980px) { .form-panel { position: static; } }
+
+.fs { border: none; padding: 0; margin: 0 0 22px; }
+.fs:last-of-type { margin-bottom: 14px; }
+.fs legend {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-soft); font-weight: 600; padding: 0 0 12px;
+}
+.f { margin-bottom: 14px; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 560px) { .f-row { grid-template-columns: 1fr; } }
+.f label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; letter-spacing: -.01em; }
+.f input, .f select {
+  width: 100%; padding: 11px 13px; font: inherit; font-size: 15px; font-weight: 500;
+  font-variant-numeric: tabular-nums; background: var(--white); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--radius-sm); letter-spacing: -.01em;
+}
+.f input:focus, .f select:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+.f .note { font-size: 12px; color: var(--ink-soft); margin-top: 5px; letter-spacing: 0; line-height: 1.5; }
+
+.chk { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.chk input { margin: 3px 0 0; accent-color: var(--ink); width: 16px; height: 16px; }
+.chk label { margin: 0; font-weight: 500; font-size: 13.5px; letter-spacing: -.01em; }
+
+.btn--submit {
+  width: 100%; justify-content: center; background: var(--ink); color: var(--white);
+  border-radius: 999px; padding: 15px 22px; font-weight: 600; font-size: 15px;
+  display: inline-flex; align-items: center; gap: 10px; letter-spacing: -.02em;
+}
+.btn--submit:hover { opacity: .88; }
+.btn--submit:disabled { opacity: .5; cursor: progress; }
+.form-foot { font-size: 12px; color: var(--ink-soft); margin-top: 14px; text-align: center; line-height: 1.6; letter-spacing: 0; }
+.form-foot a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- results ---------- */
+.results { min-height: 340px; }
+.empty { border: 1px dashed var(--line); border-radius: var(--radius-md); padding: 56px 30px; text-align: center; }
+.empty h3 { font-size: 22px; letter-spacing: -.03em; margin-bottom: 8px; }
+.empty p { font-size: 14px; color: var(--ink-soft); max-width: 44ch; margin: 0 auto; letter-spacing: 0; line-height: 1.6; }
+
+.notice {
+  border-radius: var(--radius-md); padding: 20px 22px; margin-bottom: 16px;
+  background: var(--accent-soft); border: 1px solid rgba(28, 75, 143, .22);
+}
+.notice h3 { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; }
+.notice p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; letter-spacing: 0; }
+.notice p + p { margin-top: 9px; }
+.notice--warn { background: var(--warn-soft); border-color: rgba(138, 90, 5, .28); }
+.notice--warn h3 { color: var(--warn); }
+
+.stat-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px;
+}
+.stat-cell { background: var(--paper); padding: 17px 19px; }
+.stat-cell .k { font-size: 10.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-soft); }
+.stat-cell .v { font-size: 26px; font-weight: 600; letter-spacing: -.045em; font-variant-numeric: tabular-nums; margin-top: 4px; line-height: 1.05; }
+.stat-cell .s { font-size: 12px; color: var(--ink-soft); letter-spacing: 0; margin-top: 3px; line-height: 1.45; }
+
+.ceiling {
+  background: var(--bg); color: var(--white); border-radius: var(--radius-md);
+  padding: 26px 28px; margin-bottom: 22px;
+}
+.ceiling .k { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; opacity: .62; }
+.ceiling .big {
+  font-size: clamp(38px, 6vw, 62px); font-weight: 600; letter-spacing: -.055em;
+  line-height: 1; margin: 8px 0 12px; font-variant-numeric: tabular-nums;
+}
+.ceiling p { font-size: 13.5px; opacity: .78; letter-spacing: 0; line-height: 1.65; margin: 0; }
+.ceiling p + p { margin-top: 9px; }
+.ceiling strong { opacity: 1; font-weight: 600; }
+
+.res-head {
+  display: flex; align-items: baseline; gap: 14px;
+  margin: 30px 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+}
+.res-head h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 600; letter-spacing: -.045em; }
+.res-head .meta { margin-left: auto; font-size: 12px; color: var(--ink-soft); letter-spacing: 0; text-align: right; }
+@media (max-width: 620px) { .res-head { flex-wrap: wrap; } .res-head .meta { margin-left: 0; flex-basis: 100%; text-align: left; } }
+
+/* ---------- program cards ---------- */
+.prog {
+  background: var(--paper-soft); border-radius: var(--radius-md);
+  margin-bottom: 12px; overflow: hidden; border-left: 4px solid var(--line);
+}
+.prog[data-v="likely_eligible"] { border-left-color: var(--pass); }
+.prog[data-v="possible"] { border-left-color: var(--warn); }
+.prog[data-v="not_eligible"] { border-left-color: var(--fail); }
+
+.prog-head {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 19px 22px; cursor: pointer; width: 100%; text-align: left;
+}
+.prog-head:hover { background: rgba(10, 10, 10, .03); }
+.prog-title { flex: 1; min-width: 0; }
+.prog-title h3 { font-size: 19px; font-weight: 600; letter-spacing: -.035em; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.prog-title .sum { font-size: 13px; color: var(--ink-soft); margin-top: 5px; letter-spacing: 0; line-height: 1.55; }
+.prog-price { text-align: right; flex-shrink: 0; }
+/* These are spans inside a span, so they need to be told to stack. Left
+   inline they render as "$2,763per month6.16% over 30 yr". */
+.prog-price .amt, .prog-price .per, .prog-price .rt { display: block; }
+.prog-price .amt { font-size: 24px; font-weight: 600; letter-spacing: -.045em; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.prog-price .per { font-size: 11px; color: var(--ink-soft); letter-spacing: 0; }
+.prog-price .rt { font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+@media (max-width: 620px) { .prog-head { flex-direction: column; gap: 12px; } .prog-price { text-align: left; } }
+
+.tag {
+  font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+}
+.tag--pass { background: var(--pass-soft); color: var(--pass); }
+.tag--warn { background: var(--warn-soft); color: var(--warn); }
+.tag--fail { background: var(--fail-soft); color: var(--fail); }
+.tag--ghost { background: rgba(10, 10, 10, .06); color: var(--ink-soft); }
+
+.prog-body { border-top: 1px solid var(--line); padding: 20px 22px; display: none; }
+.prog.open .prog-body { display: block; }
+.prog-body h4 {
+  font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-soft); margin: 20px 0 10px; font-weight: 600;
+}
+.prog-body h4:first-child { margin-top: 0; }
+
+.checks { list-style: none; margin: 0; padding: 0; }
+.checks li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.checks li:last-child { border-bottom: none; }
+.mk { font-weight: 700; font-size: 15px; line-height: 1.45; }
+.mk--pass { color: var(--pass); }
+.mk--warn { color: var(--warn); }
+.mk--fail { color: var(--fail); }
+.checks .cl { font-weight: 600; font-size: 14px; letter-spacing: -.01em; }
+.checks .cd { font-size: 13.5px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.6; }
+.checks .cv { font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; margin-top: 3px; letter-spacing: 0; }
+
+.cost { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.cost td { padding: 7px 0; border-bottom: 1px solid var(--line); letter-spacing: 0; }
+.cost td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.cost tr:last-child td { border-bottom: none; font-weight: 700; }
+.cost .sub td { color: var(--ink-soft); font-weight: 500; }
+
+.bullets { margin: 0; padding-left: 19px; font-size: 13.5px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.6; }
+.bullets li { margin-bottom: 6px; }
+.fine { font-size: 12.5px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.6; margin-top: 10px; }
+.assume {
+  font-size: 12.5px; color: var(--warn); background: var(--warn-soft);
+  padding: 10px 13px; border-radius: var(--radius-sm); margin-top: 13px;
+  letter-spacing: 0; line-height: 1.55;
+}
+
+/* ---------- lenders ---------- */
+.lender {
+  display: grid; grid-template-columns: 1fr auto; gap: 20px;
+  background: var(--paper-soft); border-radius: var(--radius-md);
+  padding: 19px 22px; margin-bottom: 10px;
+}
+.lender h3 { font-size: 17px; font-weight: 600; letter-spacing: -.035em; margin-bottom: 4px; }
+.lender .loc { font-size: 12.5px; color: var(--ink-soft); letter-spacing: 0; }
+.lender .why { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
+.lender .why li {
+  font-size: 11.5px; color: var(--ink-soft); background: var(--white);
+  border: 1px solid var(--line); padding: 3px 10px; border-radius: 999px; letter-spacing: 0;
+}
+.lender .side { text-align: right; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.lender .assets { font-size: 19px; font-weight: 600; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.lender .assets small { display: block; font-size: 10.5px; color: var(--ink-soft); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+.lender .visit { font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; }
+.lender .branch { font-size: 12.5px; color: var(--ink-soft); margin-top: 11px; padding-top: 11px; border-top: 1px dashed var(--line); letter-spacing: 0; }
+@media (max-width: 620px) { .lender { grid-template-columns: 1fr; } .lender .side { text-align: left; align-items: flex-start; } }
+
+.lender-note {
+  border: 1px dashed var(--line); border-radius: var(--radius-md);
+  padding: 20px 22px; font-size: 14px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.6;
+}
+.lender-note--warn { border-style: solid; border-color: rgba(138, 90, 5, .4); background: var(--warn-soft); color: var(--warn); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.chip {
+  font-size: 11px; padding: 4px 10px; border-radius: var(--radius-sm);
+  border: 1px solid var(--line); background: var(--paper-soft); color: var(--ink-soft); letter-spacing: .02em;
+}
+.chip--live { border-color: rgba(31, 107, 65, .4); color: var(--pass); }
+.chip--bad { border-color: rgba(156, 43, 35, .4); color: var(--fail); }
+
+/* ---------- content pages ---------- */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 30px; }
+.tile-card { background: var(--paper-soft); border-radius: var(--radius-md); padding: 24px 26px; }
+.tile-card .n { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--ink-soft); }
+.tile-card h3 { font-size: 19px; font-weight: 600; letter-spacing: -.035em; margin: 9px 0 8px; }
+.tile-card p { font-size: 13.5px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.6; margin: 0; }
+.tile-card .src {
+  display: inline-block; font-size: 11.5px; margin-top: 11px; padding: 3px 9px;
+  border-radius: 999px; background: var(--white); border: 1px solid var(--line); letter-spacing: .02em;
+}
+.tile-card .src a { text-decoration: underline; text-underline-offset: 2px; }
+.tile-card--dark { background: var(--bg); color: var(--white); }
+.tile-card--dark p { color: rgba(255, 255, 255, .72); }
+.tile-card--dark .n { color: rgba(255, 255, 255, .5); }
+.tile-card--dark .src { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .16); color: rgba(255, 255, 255, .8); }
+
+.deflist { list-style: none; padding: 0; margin: 30px 0 0; max-width: 80ch; }
+.deflist li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.deflist li:last-child { border-bottom: none; }
+.deflist b { display: block; font-size: 18px; font-weight: 600; letter-spacing: -.035em; margin-bottom: 6px; }
+.deflist span { font-size: 14px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.65; }
+
+.callout {
+  border-radius: var(--radius-md); background: var(--bg); color: var(--white);
+  padding: 28px 30px; margin-top: 30px; max-width: 78ch;
+}
+.callout h3 { font-size: 20px; font-weight: 600; letter-spacing: -.04em; margin-bottom: 9px; }
+.callout p { font-size: 14px; color: rgba(255, 255, 255, .75); letter-spacing: 0; line-height: 1.7; margin: 0; }
+
+.prose { max-width: 68ch; font-size: 15px; color: var(--ink-soft); letter-spacing: 0; line-height: 1.7; }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+.mt-lg { margin-top: 26px; }
+.hidden { display: none !important; }
+
+.spin {
+  display: inline-block; width: 13px; height: 13px;
+  border: 2px solid currentColor; border-right-color: transparent;
+  border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -2px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+/* ---------- chrome (injected by main.js) ---------- */
+.site-head{
+  display:flex;align-items:center;gap:24px;
+  padding:18px var(--pad);margin-bottom:var(--gap);
+  background:var(--paper);border-radius:var(--radius-lg);
+}
+.site-head .logo{font-size:19px;font-weight:700;letter-spacing:-.05em}
+.head-nav{margin-left:auto;display:flex;gap:22px}
+.head-nav a{font-size:13.5px;color:var(--ink-soft);letter-spacing:-.01em}
+.head-nav a:hover{color:var(--ink)}
+.head-nav a[aria-current="page"]{color:var(--ink);font-weight:600}
+/* Burger, three lines that fold into a cross, as the source design does it. */
+.burger{
+  display:none;margin-left:auto;flex-direction:column;gap:6px;
+  padding:8px;background:none;border:none;cursor:pointer;
+}
+.burger span{
+  width:26px;height:2px;background:var(--ink);display:block;
+  transition:transform .32s cubic-bezier(.76,0,.24,1),opacity .2s ease;
+}
+body.nav-open .burger span{background:var(--white)}
+body.nav-open .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+body.nav-open .burger span:nth-child(2){opacity:0}
+body.nav-open .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media(max-width:620px){.head-nav{display:none}.burger{display:flex}}
+@media(max-width:760px){.head-nav{gap:14px}.head-nav a{font-size:12.5px}}
+
+/* The overlay slides down from above rather than blinking into existence.
+   Transform alone would leave its links focusable while off-screen, so
+   visibility is what actually takes it out of the tab order. */
+.nav-overlay{
+  position:fixed;inset:0;z-index:90;background:var(--bg);color:var(--white);
+  padding:96px var(--pad) var(--pad);
+  display:flex;flex-direction:column;justify-content:space-between;
+  transform:translateY(-102%);visibility:hidden;
+  transition:transform .55s cubic-bezier(.76,0,.24,1),visibility 0s linear .55s;
+}
+.nav-overlay.open{transform:translateY(0);visibility:visible;transition-delay:0s,0s}
+.nav-overlay ul{list-style:none;padding:0;margin:0}
+.nav-overlay li{border-bottom:1px solid var(--line-invert)}
+.nav-overlay a{display:block;padding:18px 0;font-size:clamp(28px,7vw,46px);font-weight:600;letter-spacing:-.05em}
+.nav-meta{display:flex;flex-direction:column;gap:5px;font-size:12.5px;opacity:.6;letter-spacing:0;padding-top:22px}
+body.nav-open{overflow:hidden}
+/* The burger sits above the overlay so it can close it. */
+body.nav-open .site-head{z-index:95;background:transparent;box-shadow:none}
+body.nav-open .site-head .logo{color:var(--white)}
+
+@media(prefers-reduced-motion:reduce){
+  .nav-overlay{transition:none}
+  .burger span{transition:none}
+}
+
+.site-foot{margin-bottom:0}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:28px}
+.foot-grid ul{list-style:none;padding:0;margin:0;font-size:13px;letter-spacing:0}
+.foot-grid b{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:12px;font-weight:600}
+.foot-grid li{padding:4px 0;color:rgba(255,255,255,.72);line-height:1.55}
+.foot-grid a:hover{color:var(--white);text-decoration:underline;text-underline-offset:3px}
+.foot-base{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line-invert);
+  font-size:12.5px;color:rgba(255,255,255,.55);letter-spacing:0;
+}
+.foot-base a{text-decoration:underline;text-underline-offset:3px}
+
+/* reveal animation */
+/* Content is visible by default and only hidden once the script has
+   confirmed it can reveal it again. Without this gate, a browser with no
+   JavaScript, a failed script load, or an IntersectionObserver that never
+   fires leaves the entire page blank. A reveal animation is not worth that. */
+.reveal-ready .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal-ready .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal-ready .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ---------- contrast fixes on dark sections ---------- */
+/* A light tile sitting inside .card--dark inherited that card's white text,
+   so white type landed on a near-white panel and vanished. Every light
+   surface now states its own ink instead of inheriting. */
+.card--dark .tile-card,
+.card--dark .client-tile,
+.card--dark .deflist,
+.card--dark .prose{color:var(--ink)}
+.card--dark .tile-card h3,
+.card--dark .deflist b{color:var(--ink)}
+.card--dark .deflist span{color:var(--ink-soft)}
+.card--dark .tile-card--dark{color:var(--white)}
+.card--dark .tile-card--dark h3{color:var(--white)}
+.client-tile{color:var(--ink)}
+
+/* Accent, so a dark section is not four greys in a row. */
+.card--dark .sec-sub{color:rgba(255,255,255,.66)}
+.card--dark .tile-card .n{color:var(--accent)}
+.card--dark .tile-card--dark .n{color:#7aa5e0}
+.tile-card--dark h3{color:var(--white)}
+
+/* The marquee translates by half its width, so the tiles have to be listed
+   twice or the loop visibly jumps. */
+.marquee{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.client-tile{width:auto;min-width:170px;padding:0 26px;height:88px;font-size:17px}
+
+/* ---------- sticky header ---------- */
+/* The header must never change size while stuck.
+
+   The first version shrank its padding once you scrolled past 8px. That
+   changed the header's height, which shifted the document, which moved the
+   scroll position back across the 8px threshold, which restored the padding,
+   which shifted it back. The bar visibly vibrated between two positions.
+
+   The source template avoids this by taking the header out of flow entirely
+   and running no scroll script at all. Same principle here: constant height,
+   no scroll listener, nothing that can feed back into layout. */
+.site-head{
+  position:sticky;
+  top:var(--gap);
+  z-index:60;
+  background:var(--paper);
+  box-shadow:0 10px 30px -22px rgba(0,0,0,.5);
+}
+
+/* Anchor targets clear the bar, so "Check now" does not scroll the form
+   heading underneath it. */
+html{scroll-padding-top:104px}
+
+/* The form panel is sticky in its own right and would otherwise slide under
+   the header rather than stopping below it. */
+.form-panel{top:calc(var(--gap) + 84px)}
+
+@media(max-width:620px){
+  html{scroll-padding-top:88px}
+}
